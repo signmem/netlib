@@ -1,4 +1,4 @@
-package net
+package netlib
 
 import (
 	"net/url"
