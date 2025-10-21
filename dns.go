@@ -2,6 +2,7 @@ package netlib
 
 import (
 	"net"
+	"net/url"
 )
 
 func DnsCheck(server string) (addrs []string, err error) {
@@ -38,3 +39,14 @@ func HostOnly(hoststr string) (host string, err error) {
         return host ,nil
 }
 
+func UrlDnsCheck(urlstring string) (addr []string, err error) {
+
+	parsed, err := url.Parse(urlstring)
+	if err != nil {
+		return addr, err
+	}
+
+	domain := parsed.Hostname()
+	addr, err = DnsCheck(domain)
+	return addr, err
+}
